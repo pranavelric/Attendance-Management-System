@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "python-firebasesdkinteexample",
+  "private_key_id": "10a6dcaa4e9e2f50e6cf28d4b3cf7b205d35e235",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC6GyKt3+s3zSj/\nvfGOme+92UQt1vYquczUrgbN/o+LJgX8I3FT2RLC+xok9QX6LGrp0hkwzZ3l0pcj\nlWpMGYpjPQNRY89lHR50NBJDmkoXjqEVKRdUhPVV9duAuVzs6b6PNw6l5bbxkgPL\nf0DqHhIrGbUU71FZEqpSWO8u4AOXLegOG+cKvmYLpyu3TLot8S3+JDbJFWfoRLKl\nev5q9mieLroMeMHkoYneIiVQFzJ6MTfu9vtZKMoairFkpX6oMJaXZq4X1yT+42R0\nokx5Cm3Qj9IfYF11z77XC/K120qYySiXfOKzireWvasYKKM2FvqJfd4L7LyUs21E\nuQPPqBL7AgMBAAECggEATuCOX7RebL2jCVV3anGa91N8/pKzreMmyeNiVe905kx8\nz+Mzto5z0bj8WTqSSHiH7ccSzyjuqcgKL9Y1gcB3c10aKWZMsfXYAPdK4GUlzvsw\nEZhjX3qkwsSbvmCR3oWpMujqZ+zHD3bL7fVmzXNmTucr5Q4TY9Wx44n3Ad6HFwzw\nDapjDm+7mfalIkMAHJutbsngmmNQ02j21eColhCLVHJsxzelB5KHJmqvcWzI+s+U\nmeIN3gyVo++56MuAJJ5XoU5vI98KWmQBmG+VB8SDvFb6zvLMniQuaHeIpmZZrsS2\nM6G7y19bRLiprAHf4NrJJxQ7GkTnkewbUqDioCpaVQKBgQDnWgEeo37MhtW5MAZy\n9xNi3dTVrYd9A68ms2/NkXmgnEyVBXjIH2tWQaCPQLXRf3WwmBKb2tlf8fdWLX/t\nZWjYjs+2qNDLmrGpdjBbSWzhKC0AlAFZjp1+C/EEvjYhB+CHBaX+4SKmaI5h3AUn\nutw8v2aRfxqZaTFkbCZbyETnVwKBgQDN7xTA1DwOPQikxcnNZS5MbafzPaWL5tlG\noVXmRKjPIblJQXvCWZmombz5NsYdfvI5bu6DbWJ7UbzFkEQKxz9/jKfm9zpiD2B2\nYyyiiyvEnwixwfRVo7cq1EtknsaaeIOJVPmI/2eA7Jns+hkPQ72PKQC4wpbi8Avr\nUapht17e/QKBgBmdRXJ295r9crxGLPCdmm/fz6i4xb95oPLP+xjvel/l7jSxnmXJ\n1MCAE57Is1i2m/kpXSYUXOzahV/tObS2/Zy8cxLuLe/c+L6ib0gsIPns0M63lE6u\nE5HZEJ5N0QBnNty8K1zE4Gk8OkdrbMaxUaEIL/r77538n5NWxghza+2RAoGAAgus\n7hltm0qZ6mEYlxS5OAMi1vS2z0P0xpHVs5rc/mm8WHDxFMYlE5qrWOJlZ2eaal2i\nuuV8Q/NU57V+J4lBJTg1dsLf7pdugt6LU/YD8kkOIg3mKm+c4y0GrrIxENm/nL6e\nV/EJiytOgB8f3pnyqRhkLHGqZAi0ZZsDEUNsCtUCgYANBJh0ZkM3hT009PRo9aJt\n06aM2r5NK0xYATFsOptaCVEKzepvzFW56nRbNGvGWSuhVoAo7yOnemChmKx3AutI\nq+frvjSJzvRPh4ZIIZrLIg5m8SijBbahJJ39pC1RvPTXLaljRKhNPi3u5PF2zl5J\nGB708YwsX0Qe6DQTIJW5tQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ch5u9@python-firebasesdkinteexample.iam.gserviceaccount.com",
+  "client_id": "108588659135286406853",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ch5u9%40python-firebasesdkinteexample.iam.gserviceaccount.com"
+}
