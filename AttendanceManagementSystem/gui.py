@@ -66,16 +66,26 @@ def save(course_name, student_number, time):
 
     c = tkinter.simpledialog.askstring(
         "Password", "Enter password:",  show='*')
+    if c == "123456":
+        num_stud = 0
+        retrive_num_stud = database.collection(
+            course_name).where('time', '==', time).stream()
+        for num in retrive_num_stud:
+            num_stud += num.to_dict()['Number of students']
 
-    print(course_name, '    ', student_number, '  ', time)
+        print(course_name, '    ', student_number, '  ', time)
 
-    data_entry = database.collection(course_name).document(time)
-    data_entry.set({
-        'Number of students': student_number
-    })
+        data_entry = database.collection(course_name).document(time)
+        data_entry.set({
+            'time': time,
+            'Number of students': int(student_number)+int(num_stud)
+        })
 
-    messagebox.showinfo(title="Done", message="Data successfully saved")
-    print("Data Saved")
+        messagebox.showinfo(title="Done", message="Data successfully saved")
+        print("Data Saved")
+    else:
+        messagebox.showerror(title="Error", message="Wrong Password!"
+                             )
 
 
 global d
@@ -146,7 +156,7 @@ def retrive(tab2_course_name):
         total += int(data.to_dict()["Number of students"])
 
     course_data_listbox.insert(
-        0, f"Total Student who attent this class till now are => {total} \n\n\n"
+        0, f"Total Attendance count for this class is => {total} \n\n\n"
     )
     course_data_listbox.insert(1, "")
 
@@ -161,10 +171,11 @@ if __name__ == "__main__":
     # done initalizing
 
     root = Tk()
-    root.geometry("700x700")
-    root.configure(background='gray5')
+    root.geometry("1000x700")
+    root.configure(background='gray5', bd=1, relief=SUNKEN,)
     root.minsize(1000, 700)
     root.maxsize(1000, 700)
+
     root.title("Attendance Management System")
     root.wm_iconbitmap('Webaly.ico')
 
@@ -219,7 +230,7 @@ if __name__ == "__main__":
                           bd=5, bg="black", fg="white", relief=SUNKEN, font="Verdana 15 bold", anchor=CENTER,)
     heading_label.pack(fill=X)
 
-    center_frame = Frame(center, bg="gray6", relief=SUNKEN,)
+    center_frame = Frame(center, bg="gray6", relief=SUNKEN, bd=1)
     center_frame.pack(fill=BOTH, side=LEFT, expand=True)
 
     display1 = Label(center_frame, bg='black')
@@ -231,16 +242,16 @@ if __name__ == "__main__":
     right_frame.pack(side=RIGHT, fill=Y)
 
     select_course_label = Label(right_frame, text="Select Cource",
-                                bd=1, bg="black", fg="white", relief=SUNKEN, font="Verdana 10 ", anchor=W)
+                                bd=1, bg="black", fg="white", relief=RAISED, font="Verdana 11 ", anchor=W)
     select_course_label.grid(row=0, column=0, padx=(5, 2),
-                             pady=(1, 15), sticky=W+E+N+S, columnspan=1, rowspan=1)
+                             pady=(5, 15), sticky=W+E+N+S, columnspan=1, rowspan=1)
 
     course_choice = {'CS206', 'CS205', 'CS203', 'ES205', 'MS201'}
     course_var = StringVar(tab1)
     course_var.set('CS206')
     course_popupmenu = OptionMenu(right_frame, course_var, *course_choice)
     course_popupmenu.grid(row=0, column=1, padx=(5, 2),
-                          pady=(1, 15), sticky=W+E+N+S, columnspan=1, rowspan=1)
+                          pady=(5, 15), sticky=W+E+N+S, columnspan=1, rowspan=1)
     course_popupmenu.config(
         background='gray6', foreground='white', activebackground="yellow"
     )
@@ -260,7 +271,7 @@ if __name__ == "__main__":
 
     # method to count students using radio buttons
     choice_ways_var = IntVar()
-
+    # choice_ways_var.set(1)
     Label(right_frame, text="How do you want to take attendance?", bd=0,
           fg="white", bg="black", font="Verdana 9 bold", relief=SUNKEN).grid(row=1, column=0, columnspan=2, rowspan=1, padx=(5, 2), pady=15, sticky=N+S+W+E)
     image_radio_btn = Radiobutton(
@@ -278,7 +289,7 @@ if __name__ == "__main__":
                          pady=(2, 25), sticky=N+S+W+E, columnspan=2, rowspan=1)
 
     student_present_label = Label(right_frame, text="No. of Students",
-                                  bd=1, bg="black", fg="white", relief=SUNKEN, font="Verdana 10 ", anchor=W)
+                                  bd=1, bg="black", fg="white", relief=RAISED, font="Verdana 11 ", anchor=W)
     student_present_label.grid(row=5, column=0, padx=(5, 2),
                                pady=15, sticky=N+S+W+E, columnspan=1, rowspan=1)
 
@@ -288,9 +299,9 @@ if __name__ == "__main__":
                               pady=15, sticky=N+S+W+E, columnspan=1, rowspan=1)
 
     save_button = Button(right_frame, text="Save",
-                         bg="yellow", activebackground="black", activeforeground="yellow", fg="black", bd=2, relief=SUNKEN, font="ComicSansMs 10 bold", command=lambda: save(course_name, student_number_label.cget("text"), f"{dt.datetime.now():%c}"))
+                         bg="yellow", activebackground="black", activeforeground="yellow", fg="black", bd=2, relief=SUNKEN, font="ComicSansMs 12 bold", command=lambda: save(course_name, student_number_label.cget("text"), f"{dt.datetime.now():%a, %b %d %Y}"))
     save_button.grid(row=6, column=0, padx=(0, 0),
-                     pady=325, sticky=N+S+W+E, columnspan=2, rowspan=11)
+                     pady=313, sticky=N+S+W+E, columnspan=2, rowspan=11)
 
     status_label = Label(btm_frame, text=(f"{dt.datetime.now():%a, %b %d %Y}"),
                          relief=SUNKEN, font="ComicSansMs 10", fg='linen', bg='gray3', bd=0.5, anchor=W)
@@ -316,7 +327,7 @@ if __name__ == "__main__":
     tab2_right_frame = Frame(tab2_center, bg="gray4", relief=SUNKEN,)
     tab2_right_frame.pack(side=RIGHT, fill=Y)
     tab2_select_course_label = Label(tab2_right_frame, text="Select Cource",
-                                     bd=0, bg="black", fg="white", relief=SUNKEN, font="Verdana 11 ", anchor=W)
+                                     bd=1, bg="black", fg="white", relief=RAISED, font="Verdana 11 ", anchor=W)
     tab2_select_course_label.grid(row=0, column=0, padx=(5, 2),
                                   pady=(1, 15), sticky=W+E+N+S, columnspan=1, rowspan=1)
 
@@ -344,9 +355,9 @@ if __name__ == "__main__":
     tab2_course_var.trace('w', tab2_getOptionMenuValue)
 
     retrive_button = Button(tab2_right_frame, text="Retrive Data", bg="yellow", activebackground="black", activeforeground="yellow",
-                            fg="black", bd=2, relief=RAISED, font="ComicSansMs 12 bold", command=lambda: retrive(tab2_course_name))
+                            fg="black", bd=2, relief=SUNKEN, font="ComicSansMs 12 bold", command=lambda: retrive(tab2_course_name))
 
-    retrive_button.grid(row=1, column=0, padx=(0, 0), pady=540,
+    retrive_button.grid(row=1, column=0, padx=(0, 0), pady=535,
                         sticky=N+S+W+E, columnspan=2, rowspan=11)
 
     course_data_listbox = Listbox(
