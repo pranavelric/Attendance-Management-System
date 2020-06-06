@@ -62,6 +62,27 @@ class Video:
         print("")
 
 
+# to draw boundry around face in image
+def img_draw_boundary(img, classifier, scaleFactor, minNeighbours, color, text):
+    grey_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    features = classifier.detectMultiScale(
+        grey_img, scaleFactor, minNeighbours)
+    cord = []
+    for (x, y, w, h) in features:
+        cv2.rectangle(img, (x, y), (x+w, y+h), color, 2)
+        cord = [x, y, w, h]
+    return cord, len(features)
+
+# Detect face in image
+
+
+def img_detect(img, faceCascade):
+    color = {"blue": (255, 0, 0), "red": (0, 0, 255), "green": (0, 255, 0)}
+    cord, count = img_draw_boundary(img, faceCascade, 1.1,
+                                    10, color['blue'], "")
+    return img, count
+
+
 def save(course_name, student_number, time):
 
     c = tkinter.simpledialog.askstring(
@@ -111,25 +132,44 @@ def ok():
             except NameError:
                 print("Choosing pic again")
 
+            '''
             img = Image.open(f.name)
             img = img.resize((730, 750), Image.ANTIALIAS)
             filename = ImageTk.PhotoImage(img)
 
+            
             canvas.image = filename
             canvas.create_image(0, 0, anchor='nw', image=filename)
             canvas.pack()
-
+            '''
+            # new code added
             # image count faces
             faceCascade = cv2.CascadeClassifier(
                 'haarcascade_frontalface_default.xml')
             img = cv2.imread(f.name)
 
+            imgg, count = img_detect(img, faceCascade)
+
+            imgg = cv2.cvtColor(imgg, cv2.COLOR_BGR2RGBA)
+
+            imgg = cv2.resize(imgg, (730, 730), interpolation=cv2.INTER_AREA)
+            fimage = ImageTk.PhotoImage(image=Image.fromarray(imgg))
+
+            canvas.image = fimage
+            canvas.create_image(0, 0, anchor='nw', image=fimage)
+            canvas.pack()
+
+            student_number_label.config(text=count)
+            # new code ended
+
+            '''
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             faces = faceCascade.detectMultiScale(gray, 1.1, 10)
             count_faces = str(len(faces))
             student_number_label.config(text=str(count_faces))
+            '''
 
-        # canvas.(row=0, column=0, sticky=N+S+E+W)
+            # canvas.(row=0, column=0, sticky=N+S+E+W)
 
     else:
         display1.pack()
