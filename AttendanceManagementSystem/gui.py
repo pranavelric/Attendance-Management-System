@@ -6,17 +6,18 @@ import datetime as dt
 from cv2 import cv2
 from PIL import Image, ImageTk
 import imutils
+
 import tkinter.simpledialog
 import tkinter.filedialog
 from tkinter import messagebox
 from firebase_admin import credentials, firestore
 import firebase_admin
+from subprocess import Popen
 
 
 class Video:
     cap = cv2.VideoCapture(0)
-    faceCascade = cv2.CascadeClassifier(
-        'haarcascade_frontalface_default.xml')
+    faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
     def __init__(self):
         cap = cv2.VideoCapture(0)
@@ -99,7 +100,7 @@ def save(course_name, student_number, time):
         data_entry = database.collection(course_name).document(time)
         data_entry.set({
             'time': time,
-            'Number of students': int(student_number)+int(num_stud)
+            'Number of students': int(student_number)
         })
 
         messagebox.showinfo(title="Done", message="Data successfully saved")
@@ -199,6 +200,14 @@ def retrive(tab2_course_name):
         0, f"Total Attendance count for this class is => {total} \n\n\n"
     )
     course_data_listbox.insert(1, "")
+
+
+def train():
+    Popen('python Train.py')
+
+
+def track():
+    Popen('python TrackWithUi.py')
 
 
 if __name__ == "__main__":
@@ -397,8 +406,21 @@ if __name__ == "__main__":
     retrive_button = Button(tab2_right_frame, text="Retrive Data", bg="yellow", activebackground="black", activeforeground="yellow",
                             fg="black", bd=2, relief=SUNKEN, font="ComicSansMs 12 bold", command=lambda: retrive(tab2_course_name))
 
-    retrive_button.grid(row=1, column=0, padx=(0, 0), pady=535,
-                        sticky=N+S+W+E, columnspan=2, rowspan=11)
+    retrive_button.grid(row=1, column=0, padx=(0, 0), pady=465,
+                        sticky=N+S+W+E, columnspan=2, rowspan=5)
+
+    # Train button
+    train_button = Button(tab2_right_frame, text="Train Data", bg="yellow", activebackground="black", activeforeground="yellow",
+                          fg="black", bd=2, relief=SUNKEN, font="ComicSansMs 12 bold", command=train)
+
+    train_button.grid(row=2, column=0, padx=(0, 0), pady=500,
+                      sticky=N+S+W+E, columnspan=2, rowspan=5)
+    # Track Buttom
+    track_button = Button(tab2_right_frame, text="Track Data", bg="yellow", activebackground="black", activeforeground="yellow",
+                          fg="black", bd=2, relief=SUNKEN, font="ComicSansMs 12 bold", command=track)
+
+    track_button.grid(row=3, column=0, padx=(0, 0), pady=535,
+                      sticky=N+S+W+E, columnspan=2, rowspan=5)
 
     course_data_listbox = Listbox(
         tab2_center_frame, bg="black", fg="yellow", font="Verdana 13 bold", selectbackground="yellow", selectforeground="black", activestyle=None)
