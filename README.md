@@ -9,6 +9,7 @@ Attendance Management System by face recognition  using OpenCV
 * Tkinter
 * PIL  
 * Firebase
+* Dlib
 
 # Screenshots
 

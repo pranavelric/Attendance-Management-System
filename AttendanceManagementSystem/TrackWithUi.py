@@ -94,7 +94,7 @@ def trackImages():
     while True:
         # ret, im = cam.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = faceCascade.detectMultiScale(gray, 1.2, 5)
+        faces = faceCascade.detectMultiScale(gray, 1.2, 6)
         for(x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x+w, y+h), (225, 0, 0), 2)
             Id, conf = recognizer.predict(gray[y:y+h, x:x+w])
@@ -114,13 +114,14 @@ def trackImages():
                 noOfFile = len(os.listdir("UnknownImages"))+1
                 cv2.imwrite("UnknownImages\Image"+str(noOfFile) +
                             ".jpg", img[y:y+h, x:x+w])
-            cv2.putText(img, str(tt), (x, y+h), font, 1, (255, 255, 255), 2)
+            cv2.putText(img, str(tt), (x, y+h), font, 1, (20, 210, 10), 2)
         attendance = attendance.drop_duplicates(subset=['Id'], keep='first')
 
         cv2.imshow('Face Recognizing', img)
         pass
 
-        if cv2.waitKey(10000):
+        if cv2.waitKey(10000) or cv2.waitKey(1) == ord('q'):
+            cv2.destroyWindow('Face Recognizing')
             break
 
     ts = time.time()
@@ -134,15 +135,16 @@ def trackImages():
     Firebase = pyrebase.initialize_app(config)
     storage = Firebase.storage()
     blob = storage.child('uploads/' + fileName).put(fileName)
-    #jay = storage.child().get_url(blob['downloadTokens'])
+    # jay = storage.child().get_url(blob['downloadTokens'])
 
     data = {'name': "Date_"+date+"  Time_"+Hour+"-"+Minute+"-"+Second, 'url': "https://firebasestorage.googleapis.com/v0/b/ <gs://python-firebasesdkinteexample.appspot.com> %2FAttendance%5CAttendance_" +
             date+"_"+Hour+"-"+Minute+".csv?alt=media&token="+blob['downloadTokens']}
-    #data =  { 'name': "Date_"+date+"  Time_"+Hour+"-"+Minute+"-"+Second, 'url': jay}
-    result = firebase.post('/uploads', data, None)
+    # data =  { 'name': "Date_"+date+"  Time_"+Hour+"-"+Minute+"-"+Second, 'url': jay}
+    result = firebase.post('/uploads', data)
     print(result)
 
     # cam.release()
+
     cv2.destroyAllWindows()
 
     res = attendance
@@ -189,7 +191,8 @@ def trackImagesVideo():
         cv2.imshow('Face Recognizing', im)
         pass
 
-        if cv2.waitKey(10000):
+        if cv2.waitKey(10000) or cv2.waitKey(1) == ord('q'):
+
             break
 
     ts = time.time()
@@ -203,11 +206,11 @@ def trackImagesVideo():
     Firebase = pyrebase.initialize_app(config)
     storage = Firebase.storage()
     blob = storage.child('uploads/' + fileName).put(fileName)
-    #jay = storage.child().get_url(blob['downloadTokens'])
+    # jay = storage.child().get_url(blob['downloadTokens'])
 
     data = {'name': "Date_"+date+"  Time_"+Hour+"-"+Minute+"-"+Second, 'url': "https://firebasestorage.googleapis.com/v0/b/ <gs://fir-demo-cc179.appspot.com/> %2FAttendance%5CAttendance_" +
             date+"_"+Hour+"-"+Minute+".csv?alt=media&token="+blob['downloadTokens']}
-    #data =  { 'name': "Date_"+date+"  Time_"+Hour+"-"+Minute+"-"+Second, 'url': jay}
+    # data =  { 'name': "Date_"+date+"  Time_"+Hour+"-"+Minute+"-"+Second, 'url': jay}
     result = firebase.post('/uploads', data)
     print(result)
 
