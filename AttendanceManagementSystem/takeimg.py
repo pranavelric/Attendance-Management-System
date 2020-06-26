@@ -25,13 +25,13 @@ def isNumber(s):
         pass
 
 
-def takeImages():
-    Id = "22"
-    name = "Vaibhav"
+def CaptureImages(id, name):
+    Id = id
+    name = name
     if(isNumber(Id) and name.isalpha()):
-        # cam = cv2.VideoCapture(0)
-        harcascadePath = "haarcascade_frontalface_default.xml"
-        detector = cv2.CascadeClassifier(harcascadePath)
+
+        harcascadeFilePath = "AllData\haarcascade_frontalface_default.xml"
+        FaceDetector = cv2.CascadeClassifier(harcascadeFilePath)
         sampleNum = 0
 
         f = tkinter.filedialog.askopenfile(mode='r')
@@ -42,33 +42,33 @@ def takeImages():
             filename = ImageTk.PhotoImage(img)
 
             img = cv2.imread(f.name)
-            # imgg, count = img_detect(img, faceCascade)
 
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         while(True):
-            # ret, img = cam.read()
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = detector.detectMultiScale(gray, 1.3, 5)
-            for (x, y, w, h) in faces:
-                cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-                sampleNum = sampleNum+1
-                cv2.imwrite("SampleImages\ "+name + "."+Id + '.' +
-                            str(sampleNum) + ".jpg", gray[y:y+h, x:x+w])
+
+            grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            faces = FaceDetector.detectMultiScale(grayImg, 1.3, 5)
+            for (x, y, width, height) in faces:
+                cv2.rectangle(img, (x, y), (x+width, y+height), (255, 0, 0), 2)
+                temp = temp+1
+                cv2.imwrite("AllData\DataSetImages\ "+name + "."+Id + '.' +
+                            str(temp) + ".jpg", gray[y:y+height, x:x+width])
                 cv2.imshow('Face Detecting', img)
-            if cv2.waitKey(100) & 0xFF == ord('q'):
+            if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-            elif sampleNum > 60:
+            elif temp > 70:
                 break
-        # cam.release()
+
         cv2.destroyAllWindows()
-        res = "Images Saved for ID : " + Id + " Name : " + name
-        row = [Id, name]
-        with open('StudentRecord.csv', 'a+') as csvFile:
-            writer = csv.writer(csvFile)
-            writer.writerow(row)
-        csvFile.close()
+        data = [Id, name]
+        with open('AllData\StudentDataRecord.csv', 'a+') as filee:
+            w = csv.writer(filee)
+            w.writerow(data)
+        filee.close()
 
 
 if __name__ == "__main__":
-    takeImages()
+    id = input("Enter  roll number or Id")
+    name = input("Enter  name")
+    CaptureImages(id, name)

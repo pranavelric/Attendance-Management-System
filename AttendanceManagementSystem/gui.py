@@ -6,7 +6,6 @@ import datetime as dt
 from cv2 import cv2
 from PIL import Image, ImageTk
 import imutils
-
 import tkinter.simpledialog
 import tkinter.filedialog
 from tkinter import messagebox
@@ -17,12 +16,13 @@ from subprocess import Popen
 
 class Video:
     cap = cv2.VideoCapture(0)
-    faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    faceCascade = cv2.CascadeClassifier(
+        'AllData\haarcascade_frontalface_default.xml')
 
     def __init__(self):
         cap = cv2.VideoCapture(0)
         faceCascade = cv2.CascadeClassifier(
-            'haarcascade_frontalface_default.xml')
+            'AllData\haarcascade_frontalface_default.xml')
 
     def draw_boundary(self, img, classifier, scaleFactor, minNeighbours, color, text):
         grey_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -133,20 +133,10 @@ def ok():
             except NameError:
                 print("Choosing pic again")
 
-            '''
-            img = Image.open(f.name)
-            img = img.resize((730, 750), Image.ANTIALIAS)
-            filename = ImageTk.PhotoImage(img)
-
-            
-            canvas.image = filename
-            canvas.create_image(0, 0, anchor='nw', image=filename)
-            canvas.pack()
-            '''
             # new code added
             # image count faces
             faceCascade = cv2.CascadeClassifier(
-                'haarcascade_frontalface_default.xml')
+                'AllData\haarcascade_frontalface_default.xml')
             img = cv2.imread(f.name)
 
             imgg, count = img_detect(img, faceCascade)
@@ -162,13 +152,6 @@ def ok():
 
             student_number_label.config(text=count)
             # new code ended
-
-            '''
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = faceCascade.detectMultiScale(gray, 1.1, 10)
-            count_faces = str(len(faces))
-            student_number_label.config(text=str(count_faces))
-            '''
 
             # canvas.(row=0, column=0, sticky=N+S+E+W)
 
@@ -203,11 +186,11 @@ def retrive(tab2_course_name):
 
 
 def train():
-    Popen('python Train.py')
+    Popen('python TrainingImages.py')
 
 
 def track():
-    Popen('python TrackWithUi.py')
+    Popen('python TrackImages.py')
 
 
 if __name__ == "__main__":
