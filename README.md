@@ -22,12 +22,17 @@ Attendance Management System by face recognition  using OpenCV
  </tr>
  
   <tr>
-    <td valign="top"><img src="screenshots/Capture2.PNG"  width="750" height="500"></td>
+    <td valign="top"><img src="screenshots/astro.PNG.PNG"  width="750" height="500"></td>
  
 
  </tr>
   <tr>
     <td valign="top"><img src="screenshots/Capture3.PNG"  width="750" height="500"></td>
+ 
+
+ </tr>
+ <tr>
+    <td valign="top"><img src="screenshots/train.PNG"  width="750" height="500"></td>
  
 
  </tr>
