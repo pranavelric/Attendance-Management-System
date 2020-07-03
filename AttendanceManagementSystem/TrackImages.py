@@ -176,20 +176,20 @@ if __name__ == "__main__":
         cv2.destroyAllWindows()
 
     firebaseConfig = {
-        "apiKey": "AIzaSyABckEgLXuIltOAfKIjBH4paT3oimwelKI",
-        "authDomain": "python-firebasesdkinteexample.firebaseapp.com",
-        "databaseURL": "https://python-firebasesdkinteexample.firebaseio.com",
-        "projectId": "python-firebasesdkinteexample",
-        "storageBucket": "python-firebasesdkinteexample.appspot.com",
-        "messagingSenderId": "687025953277",
-        "appId": "1:687025953277:web:cafc0f5714677498562194",
-        "measurementId": "G-C426GLDT23"
+        "apiKey": "Enter your api key here ",
+        "authDomain": "enter auth domain here ",
+        "databaseURL": "enter your database url",
+        "projectId": "...",
+        "storageBucket": "..",
+        "messagingSenderId": "..",
+        "appId": "...",
+        "measurementId": ".."
     }
 
     firebase = firebase.FirebaseApplication(
-        "https://python-firebasesdkinteexample.firebaseio.com/", None)
+        "database url", None)
     BlobStorage = Blob.from_string(
-        "gs://python-firebasesdkinteexample.appspot.com")
+        "gs:storage url")
 
     root = tk.Tk()
     root.title("Track Data")
