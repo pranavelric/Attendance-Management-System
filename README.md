@@ -11,6 +11,8 @@ Attendance Management System by face recognition  using OpenCV
 * Firebase
 * Dlib
 
+
+
 # Screenshots
 
 
@@ -38,4 +40,8 @@ Attendance Management System by face recognition  using OpenCV
  </tr>
   
  </table>
+ 
+ 
+ 
+To run this programm , make a project in firebase then add  your firebaseKey.json in AttendanceManagementSystem folder  and add firebase-config properties code in TrackImages.py
  
