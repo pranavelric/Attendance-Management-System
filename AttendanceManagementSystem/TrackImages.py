@@ -86,7 +86,7 @@ if __name__ == "__main__":
         BlobStorage = Databasestorage.child(
             'uploads/' + AttendancefileName).put(AttendancefileName)
         StudentData = {'name': "Date_"+CurrentDate+"  Time_"+Hour+"-"+Minute+"-"+Second,
-                       'url': "https://firebasestorage.googleapis.com/v0/b/ <gs://python-firebasesdkinteexample.appspot.com> %2FAttendance%5CAttendance_" +
+                       'url': "https://firebasestorage.googleapis.com/v0/b/ <gs:add your firebase storage url here> %2FAttendance%5CAttendance_" +
                        CurrentDate+"_"+Hour+"-"+Minute +
                        ".csv?alt=media&token="+BlobStorage['downloadTokens']
 
@@ -166,7 +166,7 @@ if __name__ == "__main__":
         storage = Firebase.storage()
         bllob = storage.child('uploads/' + fileName).put(fileName)
 
-        StudentData = {'name': "Date: "+CurrentDate+" Time: "+Hour+"-"+Minute+"--"+Second, 'url': "https://firebasestorage.googleapis.com/v0/b/ <gs://fir-demo-cc179.appspot.com/> %2FAttendance%5CAttendance_" +
+        StudentData = {'name': "Date: "+CurrentDate+" Time: "+Hour+"-"+Minute+"--"+Second, 'url': "https://firebasestorage.googleapis.com/v0/b/ <gs:add your firebase storage url here/> %2FAttendance%5CAttendance_" +
                        CurrentDate+"_"+Hour+"-"+Minute+".csv?alt=media&token="+bllob['downloadTokens']}
 
         UploadDataToDatabase = firebase.post('/uploads', StudentData)
@@ -175,6 +175,7 @@ if __name__ == "__main__":
         cap.release()
         cv2.destroyAllWindows()
 
+#         enter your firebase config code here  
     firebaseConfig = {
         "apiKey": "Enter your api key here ",
         "authDomain": "enter auth domain here ",
@@ -187,9 +188,9 @@ if __name__ == "__main__":
     }
 
     firebase = firebase.FirebaseApplication(
-        "database url", None)
+        "enter your firebase database url", None)
     BlobStorage = Blob.from_string(
-        "gs:storage url")
+        "gs: enter your firebase storage url")
 
     root = tk.Tk()
     root.title("Track Data")
